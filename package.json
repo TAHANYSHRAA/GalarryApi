@@ -1,0 +1,12 @@
+{
+  "name": "GallaryFetchApi",
+  "version": "1.0.0",
+  "main": "api.js",
+  "repository": "https://github.com/TAHANYSHRAA/GallaryFetchApi",
+  "author": "TAHANYSHRAA <tahany.shraa@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4"
+  }
+}

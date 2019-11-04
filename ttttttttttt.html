@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="todo.css">
+    <title>To Do List</title>
+</head>
+
+<body>
+    <section>
+        <div >
+    <button id="getButton"  >Get</button>
+  </div>
+        <div class="container" id="cont">
+          
+        </div>
+    </section>
+    <script>
+        let Glist=[];
+
+function renderGallary(list) {
+    const html = list.map((Glist, index) => {
+    return '<div class="GallaryDiv">' +
+            '<img class=" " src=" '+'" data-id="'+Glist.thumbnail + index +'" onClick="toggleurl(event)">' + '<span id="span-txt">' + Glist.text +'</div>';
+    });
+
+
+function toggleurl()
+{
+ const myHeaders =new Headers();
+           myHeaders.append('Authorization', 'Bearer 8VT6YgkhCDm2oYhl3hfbxtrt47IJsmv6cHG1');
+           fetch('https://gorest.co.in/public-api/photos', {
+              method : 'GET',
+              headers : myHeaders
+           })
+           .then (response => response.json())
+           .then(data => console.log(data));
+}
+
+
+    </script>
+</body>
+
+</html>

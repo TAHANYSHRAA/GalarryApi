@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+
+
+}
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+	</style>
+</head>
+<body>
+
+<div class="con">
+        <div class="row1" id="add1">
+
+        </div>
+    </div>
+    <div class="show" id="showId">
+        <div class="newAdd added modal" id="add">
+
+
+        </div>
+
+        <a href="#" id="close" class="close">&times;</a>
+          <a href="#" id="open" class="open">&times;</a>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div id="first" class="first">
+    </div>
+
+
+
+
+<script type="text/javascript">
+	document.getElementById('showId').addEventListener('click', renderGallary);
+let arr=[];
+const myheaders = new Headers();
+myheaders.append('Authorization', 'Bearer 8VT6YgkhCDm2oYhl3hfbxtrt47IJsmv6cHG1');
+fetch('https://gorest.co.in/public-api/photos' , {
+        method: 'GET',
+        headers: myheaders,
+    })
+    .then(Response =>
+        Response.json())
+    .then(result =>{
+        arr= result.result,
+        renderGallary()
+    });
+
+function renderGallary(){
+    const html = arr.map((item, index) => {
+        return  '<img  src="' +item.thumbnail + '" data-id="' + index + '" onClick="togglePhotoUrl(event) ">';
+    });
+    document.getElementById('add1').innerHTML = html.join('');
+}
+
+function togglePhotoUrl(event){
+    console.log(arr);
+    document.getElementById("showId").style.visibility = "visible"
+    const index = event.target.getAttribute('data-id');
+    //console.log(index)
+    document.getElementById("add").innerHTML = '<div class= "imgDiv"><img   src="' + arr[index].url + '" class="img3"><div class="text-block">'+arr[index].title+' </div></div>';
+}
+document.getElementById("close").addEventListener('click', close);
+document.getElementById("open").addEventListener('click', open);
+
+
+function close() {
+    document.getElementById("showId").style.visibility = "hidden";
+}
+function open(){
+  document.getElementById("showId").style.display = "block";
+}
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("showId");
+  var dots = document.getElementsByClassName("demo");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace("active","");
+  }
+  slides[slideIndex-1].style.display = "block";
+ /* dots[slideIndex-1].className += "active";*/
+} 
+
+</script>
+</body>
+</html>
